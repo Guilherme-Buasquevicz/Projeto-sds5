@@ -6,28 +6,24 @@ import { BASE_URL } from "utils/requests";
 
 type ChartData = {
   labels: string[];
-  series: number[];
+  series: number[]
 }
 
 function DonutChart() {
 
-  const [chartData, setChatData] = useState<ChartData>({ labels: [], series: [] });
+  const [chartData, setChatData] = useState<ChartData>({labels: [], series: []});
 
-  useEffect(() => {
-    axios.get(BASE_URL + '/sales/amount-by-seller')
+    useEffect(() => {
+      axios.get(BASE_URL + '/sales/amount-by-seller')
       .then(response => {
         const data = response.data as SaleSum[];
         const mylabels = data.map(x => x.sellerName);
         const myseries = data.map(x => x.sum);
-
-        setChatData({ labels: mylabels, series: myseries });
+  
+          setChatData({labels: mylabels, series: myseries});
       });
-  }, [])
+    }, [])
 
-  //const mockData = {
-  //    series: [477138, 499928, 444867, 220426, 473088],
-  //    labels: ['Anakin', 'Barry Allen', 'Kal-El', 'Logan', 'Padmé']
-  //}
   const options = {
     legend: {
       show: true
